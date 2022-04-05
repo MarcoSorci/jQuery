@@ -18,28 +18,27 @@
 // });
 
 $(document).ready(() => {
-    // $('p').on('click', function () {
-    //     $('p').hide();
-    // });
-    $.getJSON("./assets/array.json", function (data) {
-        var items = [];
-        $.each(data, function (key, val) {
-            items.push("<p class='" + val + "'>" + val);
-        });
 
-        $("<div>", {
-            html: items.join("")
-        }).appendTo("body");
+    $.getJSON("./assets/array.json", function (data) {
+        $.each(data, function (key, val) {
+            $("<p>", {
+                "class": val, //properties of said element, plus html which is its content
+                html: val
+            }).appendTo(".container");
+
+            $("p:contains(" + val + ")").on("mouseover", function () {
+                $("p:contains(" + val + ")").css({ "background-color": "black", "color": "white" });
+            });
+
+            $("p:contains(" + val + ")").on("mouseout", function () {
+                $("p:contains(" + val + ")").css({ "background-color": "white", "color": "black" });
+            });
+
+            $("p:contains(" + val + ")").on("click", function () {
+                $("p:contains(" + val + ")").hide();
+            });
+
+        });
     });
 
-    
-
-
-
 });
-
-window.addEventListener('load', () => {
-    document.getElementById('ciao').className = 'ciao';
-    document.getElementById('ciao').classList.add('ciao');
-});
-
